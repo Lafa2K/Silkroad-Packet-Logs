@@ -6,12 +6,12 @@ import json
 import binascii
 from collections import Counter
 
-PLUGIN_NAME = "Awara Bounty Probe"
+PLUGIN_NAME = "Silkroad Packet Logs"
 PLUGIN_VERSION = "1.0"
 
 gui = QtBind.init(__name__, PLUGIN_NAME)
 
-QtBind.createLabel(gui, "Passive bug-bounty logger / anomaly recorder", 10, 10)
+QtBind.createLabel(gui, "Passive Silkroad packet/state logger", 10, 10)
 QtBind.createButton(gui, "start_session", "START SESSION", 10, 40)
 QtBind.createButton(gui, "stop_session", "STOP SESSION", 145, 40)
 QtBind.createButton(gui, "snapshot_now", "SNAPSHOT NOW", 280, 40)
@@ -113,7 +113,7 @@ def packet_hex(data):
 
 def marker(text):
     if not running:
-        log("[AWARA] Session is not running.")
+        log("[SPL] Session is not running.")
         return
 
     line = "=" * 70
@@ -122,7 +122,7 @@ def marker(text):
     write_log("markers", line)
 
     write_log("anomalies", "MARKER: " + text)
-    log("[AWARA] MARK: " + text)
+    log("[SPL] MARK: " + text)
 
 
 # ------------------------------------------------------------
@@ -499,10 +499,10 @@ def start_session():
     global recent_inventory_gains
 
     if running:
-        log("[AWARA] Session already running.")
+        log("[SPL] Session already running.")
         return
 
-    root = os.path.join(plugin_dir(), "AwaraBountyLogs")
+    root = os.path.join(plugin_dir(), "SilkroadPacketLogs")
     session_name = time.strftime("%Y%m%d_%H%M%S")
     session_dir = os.path.join(root, session_name)
 
@@ -510,7 +510,7 @@ def start_session():
         os.makedirs(session_dir)
     except:
         if not os.path.isdir(session_dir):
-            log("[AWARA] Could not create session folder.")
+            log("[SPL] Could not create session folder.")
             return
 
     files = {}
@@ -543,10 +543,10 @@ def start_session():
     write_log("anomalies", "Passive observation session started.")
     snapshot(True)
 
-    log("[AWARA] =======================================")
-    log("[AWARA] SESSION STARTED")
-    log("[AWARA] " + session_dir)
-    log("[AWARA] =======================================")
+    log("[SPL] =======================================")
+    log("[SPL] SESSION STARTED")
+    log("[SPL] " + session_dir)
+    log("[SPL] =======================================")
 
 
 def stop_session():
@@ -554,7 +554,7 @@ def stop_session():
     global files
 
     if not running:
-        log("[AWARA] No active session.")
+        log("[SPL] No active session.")
         return
 
     snapshot(True)
@@ -570,16 +570,16 @@ def stop_session():
 
     files = {}
 
-    log("[AWARA] =======================================")
-    log("[AWARA] SESSION STOPPED")
-    log("[AWARA] Logs saved in:")
-    log("[AWARA] " + safe(session_dir))
-    log("[AWARA] =======================================")
+    log("[SPL] =======================================")
+    log("[SPL] SESSION STOPPED")
+    log("[SPL] Logs saved in:")
+    log("[SPL] " + safe(session_dir))
+    log("[SPL] =======================================")
 
 
 def snapshot_now():
     if not running:
-        log("[AWARA] Start a session first.")
+        log("[SPL] Start a session first.")
         return
 
     snapshot(True)
@@ -695,5 +695,5 @@ def finished():
         stop_session()
 
 
-log("[AWARA] %s v%s loaded." % (PLUGIN_NAME, PLUGIN_VERSION))
-log("[AWARA] Passive logger only. It does not inject packets or automate exploits.")
+log("[SPL] %s v%s loaded." % (PLUGIN_NAME, PLUGIN_VERSION))
+log("[SPL] Passive logger only. It does not inject packets or automate exploits.")

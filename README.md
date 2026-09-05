@@ -1,8 +1,8 @@
-# Awara Bounty Probe
+# Silkroad Packet Logs
 
 Passive packet and state logger for phBot.
 
-Awara Bounty Probe helps you record what happens around your character while you test game actions: NPC dialogs, item buy/sell, teleports, inventory changes, nearby monsters, pets, combat state, and client/server packets.
+Silkroad Packet Logs helps you record what happens around your character while you test game actions: NPC dialogs, item buy/sell, teleports, inventory changes, nearby monsters, pets, combat state, and client/server packets.
 
 It does not inject packets, automate exploits, or modify gameplay. It only observes and writes logs.
 
@@ -11,7 +11,7 @@ It does not inject packets, automate exploits, or modify gameplay. It only obser
 When you press `START SESSION`, the plugin creates a folder:
 
 ```text
-Plugins/AwaraBountyLogs/YYYYMMDD_HHMMSS/
+Plugins/SilkroadPacketLogs/YYYYMMDD_HHMMSS/
 ```
 
 Inside it, each session contains:
